@@ -6,7 +6,251 @@
 <title>Vijay Electrical & Refrigeration Work</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+:root{
+    --graphite:#1A1D1F;
+    --graphite-2:#232629;
+    --steel:#2D3134;
+    --paper:#F3F1EA;
+    --paper-dim:#A9A9A2;
+    --amber:#F5B700;
+    --ice:#5FD4D0;
+    --line: rgba(243,241,234,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--graphite);
+    color:var(--paper);
+    font-family:'Archivo', sans-serif;
+    line-height:1.6;
+  }
+  ::selection{ background:var(--amber); color:var(--graphite); }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  img, svg{ display:block; max-width:100%; }
+
+  /* hazard stripe utility */
+  .stripe{
+    height:8px; width:100%;
+    background: repeating-linear-gradient(135deg, var(--amber) 0 18px, var(--graphite) 18px 36px);
+  }
+
+  header{
+    position:sticky; top:0; z-index:20;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 48px;
+    background:var(--graphite);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand .mark{
+    width:38px; height:38px; border:2px solid var(--amber);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Archivo Black', sans-serif; color:var(--amber); font-size:1.1rem;
+    transform:rotate(45deg);
+  }
+  .brand .mark span{ transform:rotate(-45deg); }
+  .brand-text{ font-family:'Archivo Black', sans-serif; font-size:1.05rem; line-height:1.15; }
+  .brand-text small{ display:block; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--paper-dim); font-weight:400; letter-spacing:0.08em; margin-top:2px; }
+
+  nav{ display:flex; gap:32px; align-items:center; }
+  nav a{
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--paper-dim); transition:color .2s;
+  }
+  nav a:hover, nav a:focus-visible{ color:var(--amber); }
+  .call-btn{
+    background:var(--amber); color:var(--graphite);
+    padding:11px 20px; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.8rem;
+    text-transform:uppercase;
+  }
+  .call-btn:hover{ background:var(--ice); }
+
+  section{ max-width:1140px; margin:0 auto; padding:100px 48px; }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--ice); display:flex; align-items:center; gap:10px; margin-bottom:20px;
+  }
+  .eyebrow::before{ content:''; width:26px; height:1px; background:var(--ice); }
+
+  /* HERO */
+  #hero{
+    padding-top:80px; padding-bottom:80px;
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:center;
+  }
+  h1.display{
+    font-family:'Archivo Black', sans-serif;
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1.05; letter-spacing:-0.01em;
+    text-transform:uppercase;
+  }
+  h1.display .hl{ color:var(--amber); }
+  .hero-sub{ margin-top:26px; max-width:46ch; color:var(--paper-dim); font-size:1.05rem; }
+  .hero-ctas{ display:flex; gap:16px; margin-top:40px; flex-wrap:wrap; }
+  .btn-primary{
+    background:var(--amber); color:var(--graphite); padding:16px 28px;
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.85rem; text-transform:uppercase;
+  }
+  .btn-primary:hover{ background:var(--ice); }
+  .btn-ghost{
+    border:1px solid var(--paper-dim); color:var(--paper); padding:16px 28px;
+    font-family:'JetBrains Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+  }
+  .btn-ghost:hover, .btn-ghost:focus-visible{ border-color:var(--ice); color:var(--ice); }
+
+  .hero-panel{
+    border:1px solid var(--line); background:var(--graphite-2);
+    padding:32px;
+  }
+  .hero-panel .row{ display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--line); font-size:0.92rem; }
+  .hero-panel .row:last-child{ border-bottom:none; }
+  .hero-panel .row .k{ color:var(--paper-dim); }
+  .hero-panel .row .v{ font-family:'JetBrains Mono',monospace; color:var(--ice); }
+
+  /* SERVICES */
+  h2.section-head{
+    font-family:'Archivo Black', sans-serif; text-transform:uppercase;
+    font-size:clamp(1.6rem, 3vw, 2.3rem); margin-bottom:48px; letter-spacing:-0.01em;
+  }
+  .services-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .service-cell{ background:var(--graphite); padding:32px; transition:background .2s; }
+  .service-cell:hover{ background:var(--graphite-2); }
+  .service-cell .num{ font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:0.8rem; margin-bottom:18px; }
+  .service-cell h3{ font-family:'Archivo Black',sans-serif; font-size:1.05rem; text-transform:uppercase; margin-bottom:12px; }
+  .service-cell p{ color:var(--paper-dim); font-size:0.92rem; }
+
+  /* WHY US */
+  .why-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:36px; margin-top:8px; }
+  .why-item .big{ font-family:'Archivo Black',sans-serif; font-size:2.4rem; color:var(--amber); }
+  .why-item .label{ margin-top:8px; color:var(--paper-dim); font-size:0.9rem; text-transform:uppercase; font-family:'JetBrains Mono',monospace; letter-spacing:0.04em; }
+
+  /* COMPLAINTS */
+  .complaints-stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:40px; }
+  .stat-cell{ background:var(--graphite-2); padding:24px; }
+  .stat-cell .big{ font-family:'Archivo Black',sans-serif; font-size:2rem; }
+  .stat-cell .big.amber{ color:var(--amber); }
+  .stat-cell .big.ice{ color:var(--ice); }
+  .stat-cell .label{ margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:0.72rem; text-transform:uppercase; color:var(--paper-dim); }
+
+  .complaint-form{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:14px;
+    background:var(--graphite-2); border:1px solid var(--line); padding:24px; margin-bottom:40px;
+  }
+  .complaint-form input, .complaint-form select{
+    background:var(--graphite); border:1px solid var(--line); color:var(--paper);
+    padding:12px 14px; font-family:'Inter',sans-serif; font-size:0.9rem; width:100%;
+  }
+  .complaint-form input:focus, .complaint-form select:focus{ outline:1px solid var(--amber); border-color:var(--amber); }
+  .complaint-form button{
+    background:var(--amber); color:var(--graphite); border:none; cursor:pointer;
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase;
+    padding:12px 14px;
+  }
+  .complaint-form button:hover{ background:var(--ice); }
+
+  .complaints-table{ width:100%; border-collapse:collapse; font-size:0.9rem; }
+  .complaints-table th{
+    text-align:left; font-family:'JetBrains Mono',monospace; font-size:0.7rem; text-transform:uppercase;
+    color:var(--paper-dim); padding:12px 14px; border-bottom:1px solid var(--line);
+  }
+  .complaints-table td{ padding:14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .complaints-table tr:hover td{ background:rgba(243,241,234,0.03); }
+  .status-badge{
+    font-family:'JetBrains Mono',monospace; font-size:0.7rem; text-transform:uppercase;
+    padding:5px 10px; border:1px solid; display:inline-block;
+  }
+  .status-badge.pending{ color:var(--amber); border-color:var(--amber); }
+  .status-badge.progress{ color:var(--ice); border-color:var(--ice); }
+  .status-badge.completed{ color:#7CD46B; border-color:#7CD46B; }
+  .del-btn{
+    background:none; border:1px solid var(--line); color:var(--paper-dim); cursor:pointer;
+    font-family:'JetBrains Mono',monospace; font-size:0.7rem; padding:6px 10px; text-transform:uppercase;
+  }
+  .del-btn:hover{ border-color:#E86A5C; color:#E86A5C; }
+  .empty-note{ color:var(--paper-dim); font-family:'JetBrains Mono',monospace; font-size:0.85rem; padding:24px 0; }
+
+  /* COMPLAINTS POPUP MODAL */
+  .modal-overlay{
+    display:none; position:fixed; inset:0; z-index:100;
+    background:rgba(10,12,14,0.78);
+    align-items:flex-start; justify-content:center;
+    padding:60px 20px; overflow-y:auto;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-panel{
+    background:var(--graphite-2); border:1px solid var(--line);
+    max-width:900px; width:100%; padding:36px; position:relative;
+  }
+  .modal-close{
+    position:absolute; top:20px; right:20px;
+    background:none; border:1px solid var(--line); color:var(--paper-dim);
+    width:34px; height:34px; cursor:pointer; font-size:1rem;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .modal-close:hover{ border-color:var(--amber); color:var(--amber); }
+  .modal-panel h2{
+    font-family:'Archivo Black', sans-serif; text-transform:uppercase;
+    font-size:1.4rem; margin-bottom:6px; padding-right:40px;
+  }
+  .modal-panel .modal-sub{ color:var(--paper-dim); font-size:0.88rem; margin-bottom:24px; }
+  @media (max-width:720px){ .modal-panel{ padding:22px; } }
+  .table-wrap{ overflow-x:auto; }
+
+  /* SERVICE AREA */
+  #area{ text-align:left; }
+  .area-tags{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .area-tags span{
+    border:1px solid var(--line); padding:9px 16px; font-family:'JetBrains Mono',monospace;
+    font-size:0.8rem; color:var(--paper-dim);
+  }
+
+  /* CONTACT */
+  #contact{
+    background:var(--graphite-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .contact-grid{ display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; }
+  .contact-line{
+    font-family:'Archivo Black', sans-serif; text-transform:uppercase;
+    font-size:clamp(1.8rem, 4vw, 2.6rem); line-height:1.15; max-width:14ch;
+  }
+  .contact-line .hl{ color:var(--amber); }
+  .contact-details .row{ display:flex; flex-direction:column; padding:18px 0; border-top:1px solid var(--line); }
+  .contact-details .row:last-child{ padding-bottom:0; }
+  .contact-details .k{ font-family:'JetBrains Mono',monospace; font-size:0.72rem; text-transform:uppercase; color:var(--paper-dim); margin-bottom:6px; }
+  .contact-details .v{ font-size:1.1rem; }
+  .contact-details a.v:hover{ color:var(--amber); }
+
+  footer{
+    padding:28px 48px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--paper-dim);
+  }
+
+  @media (max-width: 860px){
+    header{ padding:16px 24px; }
+    nav a:not(.call-btn):not(#complaintsPopupLink){ display:none; }
+    section{ padding:64px 24px; }
+    #hero, .contact-grid{ grid-template-columns:1fr; }
+    #hero{ padding-top:48px; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } html{scroll-behavior:auto;} }
+
+</style>
+<style>
+  /* ===== ADMIN LOGIN SYSTEM — styles kept in this file ===== */
+  #loginModal .modal-panel{
+    background:
+      radial-gradient(circle at 15% -10%, rgba(245,183,0,0.22), transparent 45%),
+      radial-gradient(circle at 105% 110%, rgba(95,212,208,0.18), transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23F5B700' stroke-opacity='0.06' stroke-width='1.5'%3E%3Cpath d='M10 10h30v30M60 0v25h50M0 70h25v40M50 120V95h60M90 10v35h30'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23F5B700' fill-opacity='0.12' stroke='none'/%3E%3Ccircle cx='110' cy='45' r='3' fill='%235FD4D0' fill-opacity='0.12' stroke='none'/%3E%3Ccircle cx='25' cy='110' r='3' fill='%235FD4D0' fill-opacity='0.12' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(160deg, #1E2225 0%, #15181A 100%);
+    background-size: auto, auto, 120px 120px, cover;
+    border-color: rgba(245,183,0,0.25);
+    box-shadow: 0 0 0 1px rgba(245,183,0,0.08), 0 24px 60px rgba(0,0,0,0.5);
+  }
+  #loginModal h2{ color:var(--amber); }
+</style>
 </head>
 <body>
 
@@ -257,10 +501,265 @@
 <footer>
   <div>© 2026 Vijay Electrical & Refrigeration Work</div>
   <div>Ludhiana, Punjab</div>
+  <a href="#" id="footerAdminLink" style="color:var(--paper-dim);">Admin Login</a>
 </footer>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="script.js"></script>
+<script>
+const STORAGE_KEY = 'vijay_complaints';
+
+  function loadComplaints(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) return JSON.parse(raw);
+    // sample starter data — feel free to delete these from the table
+    const sample = [
+      { date:'2026-08-10', name:'Ramesh Kumar', phone:'98765 43210', issue:'Fridge not cooling', status:'Completed' },
+      { date:'2026-08-14', name:'Simran Kaur', phone:'99888 11223', issue:'AC gas refill needed', status:'In Progress' },
+      { date:'2026-08-16', name:'Amit Verma', phone:'97001 22334', issue:'MCB tripping repeatedly', status:'Pending' }
+    ];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(sample));
+    return sample;
+  }
+
+  function saveComplaints(list){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  function statusClass(status){
+    if(status === 'Completed') return 'completed';
+    if(status === 'In Progress') return 'progress';
+    return 'pending';
+  }
+
+  function fillTable(list, bodyId, emptyId){
+    const body = document.getElementById(bodyId);
+    const emptyNote = document.getElementById(emptyId);
+    body.innerHTML = '';
+
+    if(list.length === 0){
+      emptyNote.style.display = 'block';
+    } else {
+      emptyNote.style.display = 'none';
+      list.slice().reverse().forEach((c, revIdx) => {
+        const idx = list.length - 1 - revIdx;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="mono">${c.date}</td>
+          <td>${c.name}</td>
+          <td class="mono">${c.phone}</td>
+          <td>${c.issue}</td>
+          <td>
+            <select class="mono status-select" data-idx="${idx}" style="background:var(--graphite); color:var(--paper); border:1px solid var(--line); padding:6px 8px; font-family:'JetBrains Mono',monospace; font-size:0.75rem;">
+              <option value="Pending" ${c.status==='Pending'?'selected':''}>Pending</option>
+              <option value="In Progress" ${c.status==='In Progress'?'selected':''}>In Progress</option>
+              <option value="Completed" ${c.status==='Completed'?'selected':''}>Completed</option>
+            </select>
+          </td>
+          <td><button class="del-btn" data-idx="${idx}">Delete</button></td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    // wire up status changes
+    body.querySelectorAll('.status-select').forEach(sel => {
+      sel.addEventListener('change', (e) => {
+        const list = loadComplaints();
+        const i = parseInt(e.target.dataset.idx, 10);
+        list[i].status = e.target.value;
+        saveComplaints(list);
+        render();
+      });
+    });
+
+    // wire up delete
+    body.querySelectorAll('.del-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const list = loadComplaints();
+        const i = parseInt(e.target.dataset.idx, 10);
+        list.splice(i, 1);
+        saveComplaints(list);
+        render();
+      });
+    });
+  }
+
+  function fillStats(list, targetId){
+    const total = list.length;
+    const completed = list.filter(c => c.status === 'Completed').length;
+    const progress = list.filter(c => c.status === 'In Progress').length;
+    const pending = list.filter(c => c.status === 'Pending').length;
+    document.getElementById(targetId).innerHTML = `
+      <div class="stat-cell"><div class="big">${total}</div><div class="label">Total Complaints</div></div>
+      <div class="stat-cell"><div class="big amber">${pending}</div><div class="label">Pending</div></div>
+      <div class="stat-cell"><div class="big ice">${progress}</div><div class="label">In Progress</div></div>
+      <div class="stat-cell"><div class="big" style="color:#7CD46B;">${completed}</div><div class="label">Completed</div></div>
+    `;
+  }
+
+  function render(){
+    const list = loadComplaints();
+    fillTable(list, 'complaintsBodyModal', 'emptyNoteModal');
+    fillStats(list, 'statsRowModal');
+  }
+
+  document.getElementById('complaintForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const list = loadComplaints();
+    list.push({
+      date: new Date().toISOString().slice(0,10),
+      name: document.getElementById('custName').value,
+      phone: document.getElementById('custPhone').value,
+      issue: document.getElementById('issue').value,
+      status: document.getElementById('status').value
+    });
+    saveComplaints(list);
+    this.reset();
+    render();
+  });
+
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const list = loadComplaints();
+    const name = document.getElementById('bookName').value;
+    const phone = document.getElementById('bookPhone').value;
+    const issue = document.getElementById('bookIssue').value;
+    const date = document.getElementById('bookDate').value;
+    const slot = document.getElementById('bookSlot').value;
+
+    list.push({
+      date: new Date().toISOString().slice(0,10),
+      name: name,
+      phone: phone,
+      issue: `${issue} (Slot: ${date}, ${slot})`,
+      status: 'Pending'
+    });
+    saveComplaints(list);
+
+    const confirmBox = document.getElementById('bookConfirm');
+    confirmBox.style.display = 'block';
+    confirmBox.textContent = `Thanks ${name}! Your complaint is booked for ${date}, ${slot}. We'll call you on ${phone} to confirm.`;
+
+    this.reset();
+    render();
+  });
+
+  render();
+
+</script>
+
+<script>
+  // ===== ADMIN LOGIN SYSTEM — kept entirely in this file =====
+  const ADMIN_EMAIL = 'tarashdabas@gmail.com';
+  const ADMIN_PASSWORD = 'tarash@1234';
+  const SESSION_KEY = 'vijay_admin_logged_in';
+
+  const loginModal = document.getElementById('loginModal');
+  const complaintsModal = document.getElementById('complaintsModal');
+
+  function isAdminLoggedIn(){
+    return sessionStorage.getItem(SESSION_KEY) === 'true';
+  }
+
+  function openAdminPanel(){
+    render(); // defined in script.js
+    complaintsModal.classList.add('open');
+  }
+
+  // "Admin" nav link / footer link: if already logged in this session, go straight to panel; else show login
+  function triggerAdminLogin(e){
+    e.preventDefault();
+    if(isAdminLoggedIn()){
+      openAdminPanel();
+    } else {
+      document.getElementById('loginError').style.display = 'none';
+      loginModal.classList.add('open');
+    }
+  }
+  document.getElementById('complaintsPopupLink').addEventListener('click', triggerAdminLogin);
+  document.getElementById('footerAdminLink').addEventListener('click', triggerAdminLogin);
+
+  document.getElementById('loginCloseBtn').addEventListener('click', function(){
+    loginModal.classList.remove('open');
+  });
+  loginModal.addEventListener('click', function(e){
+    if(e.target === loginModal) loginModal.classList.remove('open');
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const password = document.getElementById('loginPassword').value;
+    const errorBox = document.getElementById('loginError');
+
+    if(email === ADMIN_EMAIL.toLowerCase() && password === ADMIN_PASSWORD){
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      errorBox.style.display = 'none';
+      this.reset();
+      loginModal.classList.remove('open');
+      openAdminPanel();
+    } else {
+      errorBox.style.display = 'block';
+    }
+  });
+
+  // ---- Google Sign-In ----
+  // Replace GOOGLE_CLIENT_ID below with your own Google Cloud OAuth Client ID
+  // to make this button active.
+  const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID_HERE.apps.googleusercontent.com';
+
+  function decodeJwtPayload(token){
+    try{
+      const base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(decodeURIComponent(atob(base64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join('')));
+    } catch(err){ return null; }
+  }
+
+  function handleGoogleCredentialResponse(response){
+    const payload = decodeJwtPayload(response.credential);
+    const errorBox = document.getElementById('loginError');
+    if(payload && payload.email && payload.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()){
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      loginModal.classList.remove('open');
+      openAdminPanel();
+    } else {
+      errorBox.textContent = 'This Google account is not authorized for admin access.';
+      errorBox.style.display = 'block';
+    }
+  }
+
+  window.addEventListener('load', function(){
+    if(window.google && GOOGLE_CLIENT_ID.indexOf('YOUR_GOOGLE_CLIENT_ID_HERE') === -1){
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleCredentialResponse
+      });
+      google.accounts.id.renderButton(
+        document.getElementById('googleSignInBtn'),
+        { theme: 'filled_black', size: 'large', width: 340 }
+      );
+    } else {
+      document.getElementById('googleSignInBtn').innerHTML =
+        '<div class="mono" style="font-size:0.75rem; color:var(--paper-dim); border:1px dashed var(--line); padding:12px; text-align:center;">Google Sign-In not yet configured</div>';
+    }
+  });
+
+  // ---- Admin complaints panel open/close ----
+  document.getElementById('modalCloseBtn').addEventListener('click', function(){
+    complaintsModal.classList.remove('open');
+  });
+  complaintsModal.addEventListener('click', function(e){
+    if(e.target === complaintsModal) complaintsModal.classList.remove('open');
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      complaintsModal.classList.remove('open');
+      loginModal.classList.remove('open');
+    }
+  });
+</script>
 
 </body>
 </html>
